@@ -16,25 +16,26 @@ namespace TechJobsConsole
             return AllJobs;
         }
 
-
-        public static List<Dictionary<string, string>> FindByValue(string info, string value)
+        public static List<Dictionary<string, string>> FindByValue(string value)
         {
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>(); 
             foreach (Dictionary<string, string> job in AllJobs) 
+            //right click 'view hierarchy'
             {
-                foreach (string key in job.Values)
+
+                foreach (string item in job.Keys) 
                 {
-                    string searchTerm = value.ToLower();
-                    if (searchTerm.Contains(value.ToLower()))
-                    //if (searchTerm.Contains(value, StringComparison.OrdinalIgnoreCase))
+                    string newItem = job[item]; 
+                    if (newItem.ToLower().Contains(value.ToLower()))
+
                     {
                         jobs.Add(job);
-                        break;
+                        break; 
                     }
                 }
-            
+
             }
             return jobs;
 
@@ -62,14 +63,15 @@ namespace TechJobsConsole
             // load data, if not already loaded
             LoadData();
 
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>(); 
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
-                {
+                if (aValue.ToLower().Contains(value.ToLower()))
+                {            //right click 'view/call hierarchy'  check if method is getting called by sepeate ui entries, 
+
                     jobs.Add(row);
                 }
             }
